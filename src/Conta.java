@@ -1,8 +1,9 @@
+import java.util.Random;
 
 public abstract class Conta implements IConta {
 	
 	private static final  int AGENCIA_PADRAO = 1;
-	private static int SEQUENCIAL = 1;
+	//private static int SEQUENCIAL = 1;
 	
 	//o metodo set n será necessário pq são dados de
 	//ninguém vai mudar;
@@ -13,11 +14,13 @@ public abstract class Conta implements IConta {
 	protected Cliente cliente;
 
 	public Conta(Cliente cliente) {
+		Random numero = new Random ();
+		
 		this.agencia = Conta.AGENCIA_PADRAO;
-		this.numero = SEQUENCIAL++;
+		this.numero = 1 + numero.nextInt(9999);
 		this.cliente = cliente;
 	}
-	
+
 	@Override
 	public void sacar(double valor) {
 		saldo -= valor;
@@ -33,15 +36,7 @@ public abstract class Conta implements IConta {
 		this.sacar(valor);
 		contaDestino.depositar(valor);
 	}
-	
-	public void sacar() {
-	}
 
-	public void depositar() {
-	}
-
-	public void transferir() {
-	}
 
 	public int getAgencia() {
 		return agencia;
@@ -54,8 +49,6 @@ public abstract class Conta implements IConta {
 	public double getSaldo() {
 		return saldo;
 	}
-	
-
 
 	public Object getNome() {
 		return cliente;
@@ -63,7 +56,7 @@ public abstract class Conta implements IConta {
 	
 	protected void imprimirInfosComuns() {
 		System.out.println (String.format("Titular: %s", this.cliente.getNome()));
-		System.out.println (String.format("Agenda: %d", this.agencia));
+		System.out.println (String.format("Agencia: %d", this.agencia));
 		System.out.println (String.format("Numero: %d", this.numero));
 		System.out.println (String.format("Saldo: %.2f", this.saldo));
 	}

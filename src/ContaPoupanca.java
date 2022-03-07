@@ -10,5 +10,4 @@ public class ContaPoupanca extends Conta {
 		System.out.println ("=== Extrato conta Poupança ===");
 		super.imprimirInfosComuns();
 	}
-	
 }
